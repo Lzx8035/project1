@@ -1,4 +1,6 @@
 import React from "react";
+import { scroller } from "react-scroll";
+
 import { Drawer, List, ListItem } from "@mui/material";
 
 const SiderDrawer = ({ open, onClose }) => {
@@ -10,9 +12,20 @@ const SiderDrawer = ({ open, onClose }) => {
     { where: "location", value: "Location" },
   ];
 
+  const scrollToElement = (el) => {
+    scroller.scrollTo(el, {
+      duration: 1000,
+      delay: 100,
+      smooth: true,
+      offset: -150,
+    });
+
+    onClose(false);
+  };
+
   const renderItems = links.map((link) => {
     return (
-      <ListItem onClick={() => alert(link.where)} key={link.where}>
+      <ListItem onClick={() => scrollToElement(link.where)} key={link.where}>
         {link.value}
       </ListItem>
     );
